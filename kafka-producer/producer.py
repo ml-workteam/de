@@ -140,7 +140,7 @@ if __name__ == "__main__":
     
     while True:
         res = producer.render()
-        time.sleep(20)
+        time.sleep(60 * 5) # 5 min
 
     
     producer.kafka.close()

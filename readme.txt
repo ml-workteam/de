@@ -59,8 +59,7 @@ python producer.py
 4. Запуск пайплайна
 ------------------- 
 
-4.1. Запуск симулятора событий
-cd simulations
+4.1. cd simulations
 
 4.2. Сгенерировать пользователей
 python generate_users.py
@@ -70,4 +69,11 @@ python generate_tasks.py
 
 4.4. Генератор событий
 python simulator.py
+
+
+5. Отчет
+--------
+
+5.1. Запрос из clickhouse/report.sql
+5.2. Доступ в админку Django workteam/123456
 
