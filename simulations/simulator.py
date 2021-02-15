@@ -3,6 +3,8 @@ import json
 from random import sample, randint
 from datetime import datetime, timedelta
 import time
+import logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s: %(message)s')
 
 class User():
 
@@ -17,7 +19,7 @@ class User():
 
     def take_task(self, stage):
         task = sample(stage.tasks, 1)[0]
-        print(str(self) + ' take task ' + str(task))
+        logging.info(str(self) + ' take task ' + str(task))
         return task
 
 
@@ -30,15 +32,13 @@ class User():
             self.last_action += 1
 
         row = dict()    
-        row['user_id'] = self.user_id
-        row['target_id'] = self.last_task.id()
+        row['user'] = self.user_id
+        row['target'] = self.last_task.id()
         row['action_id'] = self.last_action
         row['time'] = stage.epoch_time
-
-
-        r = requests.post(stage.events_url, data=row)
-        print(str(self) + ' take action ' + str(self.last_action) + ' on ' + str(self.last_task) + ' ' + str(r.status_code))        
-        # print(row)
+        
+        r = requests.post(stage.events_url, data=row)       
+        logging.info(str(self) + ' take action ' + str(self.last_action) + ' on ' + str(self.last_task) + ' ' + str(r.status_code))
 
 
     def update_counter(self):
@@ -101,7 +101,6 @@ class Stage():
             self.users.append(User(user))
 
 
-
     def render(self):
 
         if self.realtime == True:
@@ -124,14 +123,16 @@ class Stage():
         return "Simulation Stage started " + str(self.epoch_started)
 
 
-stage = Stage(
-              "http://127.0.0.1:8000/api/tasks/", 
-              "http://127.0.0.1:8000/api/users/", 
-              "http://127.0.0.1:8000/api/events/", 
-              minutes_per_epoch = 4 * 60,
-              epoch_delay = 1
-              )
+if __name__ == "__main__":
+
+    stage = Stage(
+                "http://127.0.0.1:8000/api/tasks/", 
+                "http://127.0.0.1:8000/api/users/", 
+                "http://127.0.0.1:8000/api/events/", 
+                minutes_per_epoch = 4 * 60,
+                epoch_delay = 1
+                )
 
 
-stage.make_simulation()
+    stage.make_simulation(n=1000)
 

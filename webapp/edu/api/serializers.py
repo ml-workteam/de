@@ -4,7 +4,7 @@ from ..models import Event, User, Task
 class EventSerializer(serializers.ModelSerializer):
     class Meta:
         model = Event
-        fields = ['id', 'user_id', 'target_id', 'time', 'action_id']
+        fields = ['id', 'user', 'target', 'time', 'action_id']
 
 
 class UserSerializer(serializers.ModelSerializer):

@@ -2,20 +2,26 @@ import requests
 import json
 from random import sample, randint
 from datetime import datetime, timedelta
+import logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s: %(message)s')
 
-verbs = ['Решить', 'Найти', 'Определить', 'Доказать']
-nouns = ['теорему', 'задачу', 'минимум', 'максимум', 'ТКС', 'МПВ', 'Т4', 'А1']
+if __name__ == "__main__":
 
-url = 'http://127.0.0.1:8000/api/tasks/'
+    verbs = ['Solve', 'Make programm', 'Find solution', 'Prove']
+    nouns = ['task', 'problem', 'minimum', 'maximum', 'TKS', 'MVP', 'T4', 'A1', 'B3', 'C5', 'L6']
 
-tasks = list()
+    url = 'http://127.0.0.1:8000/api/tasks/'
 
-for verb in verbs:
-    for noun in nouns:
-        tasks.append(" ".join([verb, noun]))
+    tasks = list()
 
-for task in tasks:
-    row = dict()
-    row['name'] = task
-    r = requests.post(url, data=row)
-    print(r.status_code, r.reason)      
+    for verb in verbs:
+        for noun in nouns:
+            tasks.append(" ".join([verb, noun]))
+
+    for task in tasks:
+        row = dict()
+        row['name'] = task
+        r = requests.post(url, data=row)
+        logging.info("{0} - {1}".format(str(r.status_code), str(r.reason)))
+
+    logging.info("Generated {0} tasks".format(len(tasks)))  
