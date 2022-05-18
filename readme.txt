@@ -77,3 +77,12 @@ python simulator.py
 5.1. Запрос из clickhouse/report.sql
 5.2. Доступ в админку Django workteam/123456
 
+
+
+Демонстрация запуска и защита задания в видео на youtube:
+
+1. Запуск: https://youtu.be/0FseHZWM08o
+2. Проблемы на Кафке: https://youtu.be/6EIN5_A1oCo
+3. Проблемы на продюсере и на кликхаусе: https://youtu.be/4kQU2hbHPaY
+4. Убеждаемся, что все данные на месте: https://youtu.be/qm34mOUu1_M
+
